@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 29, 2016 6:19:12 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.imooc.hibernate.entity.Grade" table="grade">
+        <id name="gid" column="gid" type="java.lang.Integer">
+            <generator class="increment" />
+        </id>
+        <property name="gname" type="java.lang.String">
+            <column name="gname" length="20" not-null="true"/>
+        </property>
+        <property name="gdesc" type="java.lang.String">
+            <column name="gdesc"/>
+        </property>  
+         <set name="students" table="student" inverse="true" cascade="save-update">
+        <!-- 配置单向的一对多关联关系, 设置inverse属性为true，由多方维护关联关系，
+        	当进行保存和更新级联操作所关联的对象 -->
+        	<!-- 指定关联的外键列 -->
+        	<key column="gid"/>
+        	<one-to-many class="com.imooc.hibernate.entity.Student"/>
+        </set>           
+    </class>
+</hibernate-mapping>
